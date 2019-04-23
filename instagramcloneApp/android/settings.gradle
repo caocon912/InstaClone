@@ -1,0 +1,3 @@
+rootProject.name = 'instagramcloneApp'
+
+include ':app'
