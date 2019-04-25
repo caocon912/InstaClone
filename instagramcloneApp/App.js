@@ -11,13 +11,13 @@ import {
   Text,
   View
 } from 'react-native';
-import InstaClone from './src/InstaClone.js'
+//import InstaClone from './src/InstaClone.js'
 
 export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <InstaClone />
+        <Text>Hello</Text>
       </View>
     );
   }
