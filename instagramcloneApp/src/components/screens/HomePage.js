@@ -6,10 +6,9 @@ import {
   View,
   Image
 } from 'react-native';
-import { Avatar, Header } from 'react-native-elements';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { Icon, Container, Content, Body,Left,Right, Button } from 'native-base';
+import { Icon, Container, Content, Body,Left,Right, Button,Header } from 'native-base';
 import CardComponent from './CardComponent';
 import { TabNavigator } from 'react-navigation';
 

@@ -47,6 +47,7 @@ const AppTabNavigation =  TabNavigator({
     animationEnabled: true,
     swipeEnabled: true,
     tabBarPosition: "bottom",
+    header: null,
     headerMode: 'none',
     navigationOptions: {
       header:{
