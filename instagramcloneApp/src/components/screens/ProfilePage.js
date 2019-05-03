@@ -4,32 +4,233 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  Dimensions,
+  TouchableOpacity
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {Icon} from 'native-base';
+import {Icon,Button} from 'native-base';
+
+
 class ProfilePage extends Component {  
   static navigationOptions = {
 
       tabBarIcon :
         <Icon name="person"/>
   }  
+
+  constructor(){
+    super();
+    this.state={
+        liked:false,
+        screenWidth:Dimensions.get("window").width
+    }
+  } 
+
+  likeToggled(){
+      this.setState({
+          liked:!this.state.liked
+      })
+  }
+
   render() {
+
+    const imageUri='https://images8.alphacoders.com/618/618469.jpg';
+    const heartIconColor=(this.state.liked) ? "red" : null;
+
     return (
-      <View style={styles.container}>
-        <Text>ProfilePage</Text>
-      </View>
+      <View style={{flex:1,width:100+"%"}}>
+        <View style={styles.view1}>
+            <View style={{flexDirection:"row", alignItems:"center"}}>
+                <Text style={{fontWeight:"bold",fontSize:15}}>
+                    Như Quỳnh
+                </Text>
+            </View>
+            <View>
+                <Text style={{fontWeight:"bold",fontSize:30}}>...</Text>
+            </View>
+        </View>
+
+        <View style={styles.view2}>
+            <View style={styles.view2_1}>
+                <Image 
+                    style={styles.userpic}
+                    source={{uri:'https://static.giantbomb.com/uploads/scale_small/13/135472/1891759-002ivysaur.png'}}
+                
+                />
+                <View>
+                    <Text style={{fontWeight:"bold"}}>Như Quỳnh</Text>
+                </View>
+            </View>
+            <View style={styles.view2_2}>
+                <View style={styles.follow}>
+                    <View style={styles.imfo_follow}>
+                        <Text>2</Text>
+                        <Text>Bài viết</Text>
+                    </View>
+                    <View style={styles.imfo_follow}>
+                        <Text>12</Text>
+                        <Text>Người theo...</Text>
+                    </View>
+                    <View style={styles.imfo_follow}>
+                        <Text>14</Text>
+                        <Text>Đang theo...</Text>
+                    </View>
+                </View>
+
+                <View style={styles.button}>
+                    <Text onPress={() => this.props.navigation.navigate('EditProfile')}>Chỉnh sửa trang cá nhân</Text>
+                </View>
+            </View>
+        </View>
+
+        <View style={styles.view3}>
+            
+        </View>
+
+        <View style={styles.view4}>
+            <View style={{flexDirection:"row", alignItems:"center", justifyContent:'space-between'}} >
+                <View style={{flexDirection:"row", alignItems:"center"}}>
+                    <Image 
+                        style={styles.userpic1}
+                        source={{uri:'https://static.giantbomb.com/uploads/scale_small/13/135472/1891759-002ivysaur.png'}}
+                    
+                    />
+                    <Text style={{fontWeight:"bold",fontSize:15}}>Như Quỳnh</Text>
+                </View>
+                <View>
+                    <Text style={{fontWeight:"bold",fontSize:30}}>...</Text>
+                </View>
+            </View>
+            <TouchableOpacity 
+                activeOpacity={0.7}
+                onPress={() =>{
+                    this.likeToggled();
+                }}
+            >
+                <Image 
+                    style={{width: this.state.screenWidth,height:360,marginTop:10}}
+                    source={{uri:imageUri}} 
+                    //resizeMode={'cover'}       
+                />
+            </TouchableOpacity>
+            <View style={styles.like}>
+                <View style={styles.icon}>
+                  <Button transparent >
+                       <Icon name='heart' style={{color:heartIconColor}}/>
+                   </Button>
+                   <Button transparent>
+                       <Icon name='chatbubbles' style={{color:'black'}}/>
+                   </Button>
+                   <Button transparent>
+                       <Icon name='paper-plane' style={{color:'black'}}/>
+                   </Button>
+                </View>
+                <View style={{flexDirection:"column",alignItems:"center"}}>
+                    <Text style={{fontWeight:"bold",fontSize:15}}>100 Likes</Text>
+                </View>
+                
+            </View>
+          
+        </View>
+
+    </View>
     );
   }
 }
 export default ProfilePage;
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+  view1:{
+    flex:1,
+    alignItems:'center',
+    flexDirection:'row',
+    justifyContent:'space-between',
+    paddingHorizontal:10
   },
+  
+  view2:{
+    flex:2,
+    flexDirection:'row',
+    //justifyContent:'space-between',
+    backgroundColor: 'white',
+    alignItems:'center'
+  },
+
+  view2_1:{
+    flex:1,
+    flexDirection:'column',
+    marginLeft:20
+  },
+
+  userpic:{
+    width:70,
+    height:70,
+    borderRadius:35,
+    borderWidth:1  
+  },
+
+  view2_2:{
+    flex:4,
+    flexDirection:'column',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+
+  follow:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center'
+  },
+
+  imfo_follow:{
+    flexDirection:'column',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+
+  button:{
+    borderWidth:1,
+    width:70+"%",
+    backgroundColor:'lightyellow',
+    //color:'black',
+    alignItems:'center',
+    justifyContent:'center',
+    borderRadius:5,
+    marginTop:10
+  },
+
+  view3:{
+    flex:0.5,
+    backgroundColor: 'gray'
+  },
+
+  view4:{
+    flex:9,
+    flexDirection:'column',
+    backgroundColor: 'white'
+  },
+
+  userpic1:{
+    width:40,
+    height:40,
+    borderRadius:20,
+    borderWidth:1,
+    marginLeft:10  
+  },
+
+  icon:{
+      
+      borderColor:"blue",
+      borderTopWidth:StyleSheet.hairlineWidth,
+      borderBottomWidth:StyleSheet.hairlineWidth,
+      flexDirection:'row'
+  },
+
+  like:{
+      flexDirection:'row',
+      justifyContent:'space-between'
+      
+  }
   
 });

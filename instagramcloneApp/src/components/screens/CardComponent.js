@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { Icon, CardItem, Left, Thumbnail,Body, Container,Button } from 'native-base';
+import { Icon, CardItem, Left, Thumbnail,Body, Container,Button,Card } from 'native-base';
 class CardComponent extends Component {
   render() {
     const imageList = {

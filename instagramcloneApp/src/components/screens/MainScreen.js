@@ -15,6 +15,8 @@ import HomePage from './HomePage';
 import {Icon} from 'native-base';
 import { TabNavigator } from 'react-navigation';
 import { YellowBox } from 'react-native';
+
+
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 class MainScreen extends Component {
   render() {
