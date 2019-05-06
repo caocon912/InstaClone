@@ -1,10 +1,56 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard,Alert } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
+import {firebaseApp} from '../screens/FirebaseConfig.js'
 
 export default class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+
+        }
+
+    }
+    Dangnhap(){
+        firebaseApp.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+            .then(() => {
+                Alert.alert(
+                    'Alert Title',
+                    'Dang nhạp thanh cong : ' + this.state.email,
+                    [
+                        {
+                            text: 'Cancel',
+                            onPress: () => console.log('Cancel Pressed'),
+                            style: 'cancel',
+                        },
+                        { text: 'OK', onPress: () => console.log('OK Pressed') },
+                    ],
+                    { cancelable: false },
+                );
+                this.setState({
+                    email: '',
+                    password: '',
+                })
+            })
+            .catch(function (error) {
+                Alert.alert(
+                    'Alert Title',
+                    'Dang nhap that bai : ',
+                    [
+                        {
+                            text: 'Cancel',
+                            onPress: () => console.log('Cancel Pressed'),
+                            style: 'cancel',
+                        },
+                        { text: 'OK', onPress: () => console.log('OK Pressed') },
+                    ],
+                    { cancelable: false },
+                );
+            });
+    }
     render() {
         const Divider = (props) => {
             return <View {...props}>
@@ -25,17 +71,21 @@ export default class Login extends Component {
                             <TextInput style={styles.textInput}
                                 textContentType='emailAddress'
                                 keyboardType='email-address'
-                                placeholder="Enter your email">
+                                placeholder="Enter your email"
+                                onChangeText={(email)=>this.setState({email})}
+                                    value={this.state.email}>
                             </TextInput>
                         </View>
                         <View style={styles.textinputContainer}>
                             <TextInput style={styles.textInput}
                                 placeholder="Enter your password"
-                                secureTextEntry={true}>
+                                secureTextEntry={true}
+                                onChangeText={(password)=>this.setState({password})}
+                                    value={this.state.password}>
                             </TextInput>
                         </View>
 
-                        <TouchableOpacity style={styles.loginButton}>
+                        <TouchableOpacity style={styles.loginButton}onPress={()=>{this.Dangnhap()}}>
                             <Text style={styles.loginButtonTitle}>LOGIN</Text>
                         </TouchableOpacity>
                         <Divider style={styles.divider}></Divider>
@@ -48,7 +98,10 @@ export default class Login extends Component {
 
                     </View>
                     <View style={styles.down}>
-                        <Text style={styles.titles3}>Don't have an account? Sign up</Text>
+                        <Text style={styles.titles3}>Don't have an account?</Text>
+                        <TouchableOpacity
+                        onPress={()=>{this.props.goRegister()}}>
+                        <Text style={styles.titles3}>Sign up</Text></TouchableOpacity>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
@@ -67,17 +120,17 @@ const styles = StyleSheet.create({
 
     },
     up: {
-        flex: 3,
+        
         flexDirection: 'column',
     },
     between: {
-        flex: 5,
+     
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
     down:{
-        flex: 2,
+        
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
