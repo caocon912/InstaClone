@@ -6,38 +6,49 @@ import {
   View,
   Image
 } from 'react-native';
-import { Avatar } from 'react-native-elements';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import { Icon, Container, Content, Body,Left,Right, Button,Header } from 'native-base';
+import CardComponent from './CardComponent';
+import { TabNavigator } from 'react-navigation';
+
 class HomePage extends Component {
-  static navigationOptions = {
-    tabBarIcon : ({tintConlor })=>(
-    <FontAwesome.Button name="home"  style={{color:tintConlor}}>
-    </FontAwesome.Button>
-    )
-  }  
+  static navigationOptions={
+    tabBarIcon : <Icon name="home"/>
+  }
+    
   render() {
     return (
-      <View style={styles.container}>
-        <Text>HomePage</Text>
-        <Avatar
-          small
-          rounded
-          source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}}
-          onPress={() => console.log("Works!")}
-          activeOpacity={0.7}
-        />
-      </View>
+      <Container style={styles.container}>
+          <Header style={{backgroundColor:"white"}}>
+            <Left><Icon name = "camera" style={{paddingLeft:10}}/></Left>
+            <Body><Text>Instagram</Text></Body>
+            <Right><Icon name = 'paper-plane' style={{paddingRight:10}}/></Right>
+          </Header>
+        <Content>
+          <CardComponent 
+            imageSource = "1" 
+            userComment = "Nhi"
+            comment = "Wow!"
+          />
+          <CardComponent 
+            imageSource = "2" 
+            userComment = "Thi"
+            comment = "Beautiful!"
+          />
+          <CardComponent 
+            imageSource = "3" 
+            userComment = "Quynh"
+            comment = "Like"
+          />
+        </Content>
+      </Container>
     );
   }
 }
 export default HomePage;
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    flex:0,
+    backgroundColor: 'white',
   },
-  
 });

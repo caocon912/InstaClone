@@ -71,7 +71,7 @@ class CardComponent extends Component {
            <CardItem>
                 <Thumbnail source = {require('../pictures/dog.jpg')} small></Thumbnail>
                 <Text>
-                    <Text style={{color:'black', fontWeight: 'bold'}}>{this.props.userComment}: </Text>
+                    <Text style={{color:'black', fontWeight: 'bold'}}> {this.props.userComment}: </Text>
                     {this.props.comment}
                 </Text>
            </CardItem>
