@@ -6,19 +6,29 @@ import {
   View,
   Image
 } from 'react-native';
+import { Avatar } from 'react-native-elements';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import NotificationPage from './NotificationPage';
 import PostPage from './PostPage';
 import ProfilePage from './ProfilePage';
 import SearchPage from './SearchPage';
 import HomePage from './HomePage';
-import {Icon} from 'native-base';
-import { TabNavigator } from 'react-navigation';
-import { YellowBox } from 'react-native';
+import { TabNavigator } from 'react-navigation'
 
-
-YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 class MainScreen extends Component {
+  
+  static navigationOptions = {
+    headerLeft:<FontAwesome.Button name={'camera'}  style={{paddingLeft:10}}>
+    </FontAwesome.Button>,
+    title : <Text style={{paddingHorizontal:"center"}}>Instagram</Text>,
+    headerRight : <FontAwesome.Button name="paper-plane" style={{paddingRight:10}}>
+    </FontAwesome.Button>
+    /*headerLeft:<Icon name = "camera-outline" style={{paddingLeft:10}}/>,
+    title : "Instagram",
+    headerRight : <Icon name = "send-outline" style={{paddingRight:10}}/>*/
+  } 
+  
   render() {
     return (
       <AppTabNavigation/>
@@ -49,27 +59,21 @@ const AppTabNavigation =  TabNavigator({
     animationEnabled: true,
     swipeEnabled: true,
     tabBarPosition: "bottom",
-    header: null,
-    headerMode: 'none',
-    navigationOptions: {
-      header:{
-        visible: false
-      }
-    },
     tabBarOptions: {
       activeTintColor: "#000",
       inactiveTintColor: "#d1cece",
       showLabel: false,
-      showIcon: true,
-      style:{
-          backgroundColor:"white"
-        }
-      }
+      showIcon: true
+
     }
+  }
 )
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   

@@ -4,17 +4,32 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  Alert
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { Icon, CardItem, Left, Thumbnail,Body, Container,Button,Card } from 'native-base';
+import { Input,Icon, CardItem, Left, Thumbnail,Body, Container,Button,Card } from 'native-base';
 class CardComponent extends Component {
-  render() {
+    constructor(){
+        super();
+        this.state={
+            liked:false,
+            likeNumber : 0,
+        }
+    } 
+    likeToggled(){
+        this.setState({
+            liked:!this.state.liked
+        })
+    }
+    render() {
+    const heartIconColor=(this.state.liked) ? "red" : null;
+    let Likednumber = (this.state.liked) ? (this.setState.numberLiked = this.state.likeNumber + 1) : (this.state.likeNumber);
     const imageList = {
         "1" : require("./me.jpg"),
-        "2" : require("../pictures/me.jpg"),
-        "3" : require("./me.jpg")
+        "2" : require("../pictures/dog.jpg"),
+        "3" : require("../pictures/coder.jpg")
     }
     return (
     <View style={styles.container}>
@@ -24,7 +39,7 @@ class CardComponent extends Component {
                <Left>
                    <Thumbnail source={require ("./me.jpg")}/>
                    <Body>
-                       <Text>Vorum</Text>
+                       <Text style={{ fontWeight: 'bold'}}>Vorum</Text>
                        <Text note>Jan 15,2018</Text>
                    </Body>
                </Left>
@@ -36,8 +51,9 @@ class CardComponent extends Component {
 
            <CardItem style={{height:45}}>
                <Left>
-                   <Button transparent>
-                       <Icon name='heart' style={{color:'black'}}/>
+                   <Button transparent onPress={() =>{
+                    this.likeToggled()}}>
+                       <Icon name='heart' style={{color:heartIconColor}}/>
                    </Button>
                    <Button transparent>
                        <Icon name='chatbubbles' style={{color:'black'}}/>
@@ -49,15 +65,21 @@ class CardComponent extends Component {
            </CardItem>
 
            <CardItem style={{height:20}}>
-                <Text>{this.props.like}</Text>
+                <Text>{Likednumber} likes this</Text>
            </CardItem>
            
            <CardItem>
+                <Thumbnail source = {require('../pictures/dog.jpg')} small></Thumbnail>
                 <Text>
-                    <Text style={{color:'black'}}>Vorum:</Text>
-                    This is comment of post. Today is April 30th 2019 and I am eating a cupcake so sweet.
+                    <Text style={{color:'black', fontWeight: 'bold'}}>{this.props.userComment}: </Text>
+                    {this.props.comment}
                 </Text>
            </CardItem>
+
+            <CardItem>
+                <Thumbnail source={require('../pictures/dog.jpg')} small></Thumbnail>
+                <Input placeholder='Write your comment'/>
+            </CardItem>
        
        </Card>
     </View>
