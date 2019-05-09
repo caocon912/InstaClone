@@ -13,9 +13,10 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {Icon,Button} from 'native-base';
 
 
+
 class ProfilePage extends Component {  
   static navigationOptions = {
-
+    header: null,
       tabBarIcon :
         <Icon name="person"/>
   }  
@@ -80,7 +81,10 @@ class ProfilePage extends Component {
                 </View>
 
                 <View style={styles.button}>
-                    <Text onPress={() => this.props.navigation.navigate('EditProfile')}>Chỉnh sửa trang cá nhân</Text>
+                <TouchableOpacity onPress={() =>this.props.navigation.navigate('EditProfilePage')}>
+                <Text >Chỉnh sửa trang cá nhân</Text>
+                </TouchableOpacity>
+                    
                 </View>
             </View>
         </View>

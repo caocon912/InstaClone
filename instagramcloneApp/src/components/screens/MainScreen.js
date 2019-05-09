@@ -14,7 +14,17 @@ import PostPage from './PostPage';
 import ProfilePage from './ProfilePage';
 import SearchPage from './SearchPage';
 import HomePage from './HomePage';
+
+import {Icon} from 'native-base';
+import { TabNavigator } from 'react-navigation';
+import { YellowBox } from 'react-native';
+import Login from './Login'
+import Navigatorprofile from './Navigatorprofile'
+
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+=======
 import { TabNavigator } from 'react-navigation'
+
 
 class MainScreen extends Component {
   
@@ -53,7 +63,8 @@ const AppTabNavigation =  TabNavigator({
     screen: NotificationPage
   },
   Profile: {
-    screen: ProfilePage
+    screen: Navigatorprofile
+
   }
   },{
     animationEnabled: true,
