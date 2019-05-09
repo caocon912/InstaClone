@@ -1,9 +1,24 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
+import {firebaseApp} from './FirebaseConfig'
 
 export default class Forgotpassword extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            password: '',
+        }
+
+    }
+    supmit(){
+        firebaseApp.auth().sendPasswordResetEmail(this.state.email)
+        .then(function(user){
+            alert("Please check your email");
+        }).catch(function(error){
+            alert(error);
+        })
+    }
     render() {
         const Divider = (props) => {
             return <View {...props}>
@@ -26,11 +41,13 @@ export default class Forgotpassword extends Component {
                             <TextInput style={styles.textInput}
                                 textContentType='emailAddress'
                                 keyboardType='email-address'
-                                placeholder="Enter your email">
+                                placeholder="Enter your email"
+                                onChangeText={(email)=>this.setState({email})}
+                                    value={this.state.email}>
                             </TextInput>
                         </View>
 
-                        <TouchableOpacity style={styles.loginButton}>
+                        <TouchableOpacity style={styles.loginButton} onPress={()=>{this.supmit()}}>
                             <Text style={styles.loginButtonTitle}>Sent Login Link </Text>
                         </TouchableOpacity>
 

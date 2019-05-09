@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {firebaseApp} from '../screens/FirebaseConfig.js'
+import { firebaseApp } from '../screens/FirebaseConfig.js'
 
 export default class ChangePassword extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            newPassword:'',
-            currentPassword:'',
+            newPassword: '',
+            currentPassword: '',
         };
     }
     reauthenticate = (currentPassword) => {
@@ -30,6 +30,7 @@ export default class ChangePassword extends Component {
         }).catch((error) => {
             Alert.alert(error.message);
         });
+        
 
 
     }

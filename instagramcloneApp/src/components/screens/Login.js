@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         width: 400,
         fontSize: 30,
+        marginBottom:30
     },
     textinputContainer: {
         paddingHorizontal: 10,

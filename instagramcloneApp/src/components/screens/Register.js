@@ -14,8 +14,10 @@ class Register extends Component {
 
     }
     Dangky() {
+        
         firebaseApp.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then(() => {
+        .then( ()=> {
+            var user = firebaseApp.auth().currentUser;
                 Alert.alert(
                     'Alert Title',
                     'Dang ki thanh cong : ' + this.state.email,
@@ -25,10 +27,12 @@ class Register extends Component {
                             onPress: () => console.log('Cancel Pressed'),
                             style: 'cancel',
                         },
+                        user.sendEmailVerification(),
                         { text: 'OK', onPress: () =>  this.props.navigation.navigate('Login') },
                     ],
                     { cancelable: false },
                 );
+                
                 this.setState({
                     email: '',
                     password: '',
