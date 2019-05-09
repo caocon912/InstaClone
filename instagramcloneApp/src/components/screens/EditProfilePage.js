@@ -1,11 +1,11 @@
-https://github.com/caocon912/instagramcloneApp.gitimport React, { Component } from 'react';
+import React, { Component } from 'react';
 import {
   Platform,
   StyleSheet,
   Text,
   View,
   Image,
-  TextInput
+  TextInput,TouchableOpacity
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -96,7 +96,10 @@ class EditProfile extends Component {
             </View>
 
             <View style={styles.view4}>
-                <Text>Đổi mật khẩu</Text>
+            <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('Change_password')}
+            ><Text>Đổi mật khẩu</Text></TouchableOpacity>
+                
             </View>
 
         </View>

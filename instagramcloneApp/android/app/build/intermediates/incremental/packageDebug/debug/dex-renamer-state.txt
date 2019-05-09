@@ -1,4 +1,4 @@
-#Sun May 05 21:15:42 ICT 2019
-base.0=D\:\\ReactNative\\Instagramclone\\instagramcloneApp\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+#Tue May 07 16:25:52 ICT 2019
+base.0=D\:\\ReactNative\\InstagramClone\\instagramcloneApp\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex

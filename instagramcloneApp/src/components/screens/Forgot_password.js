@@ -41,7 +41,7 @@ export default class Forgotpassword extends Component {
                         </FontAwesome.Button>
 
                     </View>
-                    <TouchableOpacity style={styles.down}>
+                    <TouchableOpacity style={styles.down}onPress={() => this.props.navigation.navigate('Login')}>
                         <Text style={styles.titles3}>Back to Login</Text>
                     </TouchableOpacity>
                 </View>

@@ -25,7 +25,7 @@ class Register extends Component {
                             onPress: () => console.log('Cancel Pressed'),
                             style: 'cancel',
                         },
-                        { text: 'OK', onPress: () => console.log('OK Pressed') },
+                        { text: 'OK', onPress: () =>  this.props.navigation.navigate('Login') },
                     ],
                     { cancelable: false },
                 );
@@ -99,7 +99,9 @@ class Register extends Component {
                             </View>
                         </View>
                         <View style={styles.down2}>
-                            <Text style={styles.titles3}>Have an account? Log in</Text>
+                            <Text style={styles.titles3}>Have an account? </Text>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}
+                            ><Text style={styles.titles3}>Login</Text></TouchableOpacity> 
                         </View>
                     </View>
                 </TouchableWithoutFeedback>

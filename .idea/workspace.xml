@@ -9,30 +9,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/instagramcloneApp/android/app/build/generated/source/r/debug/android/support/v4/R.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#238#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/instagramcloneApp/android/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#90405#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -48,164 +25,34 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="Instagramclone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Instagramclone" type="462c0819:PsiDirectoryNode" />
+              <item name="InstagramClone" type="b2602c69:ProjectViewProjectNode" />
+              <item name="InstagramClone" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Instagramclone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Instagramclone" type="462c0819:PsiDirectoryNode" />
+              <item name="InstagramClone" type="b2602c69:ProjectViewProjectNode" />
+              <item name="InstagramClone" type="462c0819:PsiDirectoryNode" />
               <item name="instagramcloneApp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Instagramclone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Instagramclone" type="462c0819:PsiDirectoryNode" />
+              <item name="InstagramClone" type="b2602c69:ProjectViewProjectNode" />
+              <item name="InstagramClone" type="462c0819:PsiDirectoryNode" />
               <item name="instagramcloneApp" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Instagramclone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Instagramclone" type="462c0819:PsiDirectoryNode" />
-              <item name="instagramcloneApp" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Instagramclone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Instagramclone" type="462c0819:PsiDirectoryNode" />
-              <item name="instagramcloneApp" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Instagramclone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Instagramclone" type="462c0819:PsiDirectoryNode" />
-              <item name="instagramcloneApp" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-              <item name="generated" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Instagramclone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Instagramclone" type="462c0819:PsiDirectoryNode" />
-              <item name="instagramcloneApp" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-              <item name="generated" type="462c0819:PsiDirectoryNode" />
-              <item name="source" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Instagramclone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Instagramclone" type="462c0819:PsiDirectoryNode" />
-              <item name="instagramcloneApp" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-              <item name="generated" type="462c0819:PsiDirectoryNode" />
-              <item name="source" type="462c0819:PsiDirectoryNode" />
-              <item name="r" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Instagramclone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Instagramclone" type="462c0819:PsiDirectoryNode" />
-              <item name="instagramcloneApp" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-              <item name="generated" type="462c0819:PsiDirectoryNode" />
-              <item name="source" type="462c0819:PsiDirectoryNode" />
-              <item name="r" type="462c0819:PsiDirectoryNode" />
-              <item name="debug" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Instagramclone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Instagramclone" type="462c0819:PsiDirectoryNode" />
-              <item name="instagramcloneApp" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-              <item name="generated" type="462c0819:PsiDirectoryNode" />
-              <item name="source" type="462c0819:PsiDirectoryNode" />
-              <item name="r" type="462c0819:PsiDirectoryNode" />
-              <item name="debug" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Instagramclone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Instagramclone" type="462c0819:PsiDirectoryNode" />
-              <item name="instagramcloneApp" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-              <item name="generated" type="462c0819:PsiDirectoryNode" />
-              <item name="source" type="462c0819:PsiDirectoryNode" />
-              <item name="r" type="462c0819:PsiDirectoryNode" />
-              <item name="debug" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="support" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Instagramclone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Instagramclone" type="462c0819:PsiDirectoryNode" />
-              <item name="instagramcloneApp" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-              <item name="generated" type="462c0819:PsiDirectoryNode" />
-              <item name="source" type="462c0819:PsiDirectoryNode" />
-              <item name="r" type="462c0819:PsiDirectoryNode" />
-              <item name="debug" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="support" type="462c0819:PsiDirectoryNode" />
-              <item name="v4" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Instagramclone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Instagramclone" type="462c0819:PsiDirectoryNode" />
-              <item name="instagramcloneApp" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-              <item name="generated" type="462c0819:PsiDirectoryNode" />
-              <item name="source" type="462c0819:PsiDirectoryNode" />
-              <item name="r" type="462c0819:PsiDirectoryNode" />
-              <item name="debug" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="support" type="462c0819:PsiDirectoryNode" />
-              <item name="v7" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Instagramclone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Instagramclone" type="462c0819:PsiDirectoryNode" />
-              <item name="instagramcloneApp" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-              <item name="generated" type="462c0819:PsiDirectoryNode" />
-              <item name="source" type="462c0819:PsiDirectoryNode" />
-              <item name="r" type="462c0819:PsiDirectoryNode" />
-              <item name="debug" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="support" type="462c0819:PsiDirectoryNode" />
-              <item name="v7" type="462c0819:PsiDirectoryNode" />
-              <item name="appcompat" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../MyProject/android" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="RunDashboard">
@@ -254,6 +101,16 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/instagramcloneApp/android/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#90405#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instagramcloneApp/src/InstaClone.js" />
     <entry file="file://$PROJECT_DIR$/instagramcloneApp/android/app/build/generated/source/r/debug/android/support/v4/R.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -263,12 +120,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/instagramcloneApp/android/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java">
+    <entry file="file://$PROJECT_DIR$/instagramcloneApp/android/settings.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#90405#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="17">
+          <caret line="1" column="36" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instagramcloneApp/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
         </state>
       </provider>
     </entry>
