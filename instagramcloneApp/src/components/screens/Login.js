@@ -21,14 +21,14 @@ export default class Login extends Component {
                 AsyncStorage.setItem('user',user);
                 Alert.alert(
                     'Alert Title',
-                    'Dang nhạp thanh cong : ' + this.state.email,
+                    'Dang nhap thanh cong : ' + this.state.email,
                     [
                         {
                             text: 'Cancel',
                             onPress: () => console.log('Cancel Pressed'),
                             style: 'cancel',
                         },
-                        { text: 'OK', onPress: () => console.log('OK Pressed') },
+                        { text: 'OK', onPress: () => this.props.navigation.navigate('MainScreen') },
                     ],
                     { cancelable: false },
                 );
@@ -95,7 +95,8 @@ export default class Login extends Component {
                         <FontAwesome.Button name="facebook" backgroundColor='#3897f0' style={styles.facebookButton}>
                             <Text style={styles.loginButtonTitle}>Login with Facebook</Text>
                         </FontAwesome.Button>
-                        <TouchableOpacity style={styles.textforgot}>
+                        <TouchableOpacity style={styles.textforgot}
+                        onPress={() => this.props.navigation.navigate('Forgot_password')}>
                             <Text style={styles.titles2}>Forgot password?</Text>
                         </TouchableOpacity>
 
@@ -103,7 +104,7 @@ export default class Login extends Component {
                     <View style={styles.down}>
                         <Text style={styles.titles3}>Don't have an account?</Text>
                         <TouchableOpacity
-                        onPress={()=>{this.props.goRegister()}}>
+                        onPress={() => this.props.navigation.navigate('Register')}>
                         <Text style={styles.titles3}>Sign up</Text></TouchableOpacity>
                     </View>
                 </View>
@@ -143,6 +144,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         width: 400,
         fontSize: 30,
+        marginBottom:30
     },
     textinputContainer: {
         paddingHorizontal: 10,
@@ -152,11 +154,11 @@ const styles = StyleSheet.create({
     },
     textInput: {
         width: 280,
-        height: 45,
+        height: 35,
     },
     loginButton: {
         width: 300,
-        height: 40,
+        height: 35,
         borderRadius: 6,
         justifyContent: 'center',
         alignItems: 'center',
@@ -169,7 +171,7 @@ const styles = StyleSheet.create({
     },
     facebookButton: {
         width: 300,
-        height: 40,
+        height: 35,
         borderRadius: 6,
         justifyContent: 'center',
         alignItems: 'center',
@@ -185,7 +187,7 @@ const styles = StyleSheet.create({
     },
     divider: {
         flexDirection: 'row',
-        height: 40,
+        height: 30,
         width: 298,
         justifyContent: 'center',
         alignItems: 'center',
@@ -195,7 +197,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         width: 300,
         fontSize: 15,
-        marginTop:20,
+        marginTop:10,
         textAlign:'right'
     },
     titles3: {
@@ -203,11 +205,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         width: 300,
         fontSize: 15,
-        marginTop:20,
+        marginTop:10,
         
     },
     textforgot:{
-        marginTop:20,
+        marginTop:10,
         justifyContent: 'center',
         alignItems: 'center',
     },

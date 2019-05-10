@@ -2,9 +2,38 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
+import { firebaseApp } from '../screens/FirebaseConfig.js'
 
 export default class ChangePassword extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            newPassword: '',
+            currentPassword: '',
+        };
+    }
+    reauthenticate = (currentPassword) => {
+        var user = firebaseApp.auth().currentUser;
+        var cred = firebaseApp.auth.EmailAuthProvider.credential(user.email, currentPassword);
+        return user.reauthenticateWithCredential(cred);
+    }
+
+    onChangePassword() {
+
+        this.reauthenticate(this.state.currentPassword).then(() => {
+            var user = firebaseApp.auth().currentUser;
+            user.updatePassword(this.state.newPassword).then(() => {
+                Alert.alert("Password was changed");
+            }).catch((error) => {
+                Alert.alert(error.message);
+            });
+        }).catch((error) => {
+            Alert.alert(error.message);
+        });
+        
+
+
+    }
     render() {
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -15,33 +44,33 @@ export default class ChangePassword extends Component {
                     <View style={styles.between}>
                         <View style={styles.textinputContainer}>
                             <TextInput style={styles.textInput}
-                                placeholder="Old Password"
-                                secureTextEntry={true}>
+                                placeholder="Current Password"
+                                secureTextEntry={true}
+                                value={this.state.currentPassword}
+                                onChangeText={(currentPassword) => this.setState({ currentPassword })}
+                            >
                             </TextInput>
                         </View>
                         <View style={styles.textinputContainer}>
                             <TextInput style={styles.textInput}
                                 placeholder="New Password"
-                                secureTextEntry={true}>
-                            </TextInput>
-                        </View>
-                        <View style={styles.textinputContainer}>
-                            <TextInput style={styles.textInput}
-                                placeholder="Confirm New Password"
-                                secureTextEntry={true}>
+                                secureTextEntry={true}
+                                value={this.state.newPassword}
+                                onChangeText={(newPassword) => this.setState({ newPassword })}
+                            >
                             </TextInput>
                         </View>
 
-                        <TouchableOpacity style={styles.loginButton}>
+                        <TouchableOpacity style={styles.loginButton} onPress={() => { this.onChangePassword() }}>
                             <Text style={styles.loginButtonTitle}>Change password</Text>
                         </TouchableOpacity>
-                
+
                         <View style={styles.textforgot}>
                             <Text style={styles.titles2}>Forgot password?</Text>
                         </View>
 
                     </View>
-                    
+
                 </View>
             </TouchableWithoutFeedback>
         )
@@ -68,7 +97,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
-  
+
     titles: {
         color: 'black',
         textAlign: 'center',
@@ -126,19 +155,19 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         width: 300,
         fontSize: 15,
-        marginTop:20,
-        textAlign:'right'
+        marginTop: 20,
+        textAlign: 'right'
     },
     titles3: {
         color: 'black',
         textAlign: 'center',
         width: 300,
         fontSize: 15,
-        marginTop:20,
-        
+        marginTop: 20,
+
     },
-    textforgot:{
-        marginTop:20,
+    textforgot: {
+        marginTop: 20,
         justifyContent: 'center',
         alignItems: 'center',
     },

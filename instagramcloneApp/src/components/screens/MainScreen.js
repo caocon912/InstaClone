@@ -15,7 +15,7 @@ import HomePage from './HomePage';
 import {Icon} from 'native-base';
 import { TabNavigator } from 'react-navigation';
 import { YellowBox } from 'react-native';
-
+import Navigatorprofile from './Navigatorprofile'
 
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 class MainScreen extends Component {
@@ -42,7 +42,7 @@ const AppTabNavigation =  TabNavigator({
     screen: NotificationPage
   },
   Profile: {
-    screen: ProfilePage
+    screen: Navigatorprofile
   }
   },{
     animationEnabled: true,
