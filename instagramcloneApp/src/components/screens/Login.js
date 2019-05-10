@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard,Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard,Alert,AsyncStorage } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {firebaseApp} from '../screens/FirebaseConfig.js'
@@ -17,6 +17,8 @@ export default class Login extends Component {
     Dangnhap(){
         firebaseApp.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
             .then(() => {
+                let user=this.state.email;
+                AsyncStorage.setItem('user',user);
                 Alert.alert(
                     'Alert Title',
                     'Dang nhạp thanh cong : ' + this.state.email,
@@ -62,6 +64,7 @@ export default class Login extends Component {
         }
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                
                 <View style={styles.container}>
                     <View style={styles.up}>
                         <Text style={styles.titles}>Instagram</Text>
