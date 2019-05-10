@@ -78,7 +78,6 @@ class CardComponent extends Component {
     return (
     <View style={styles.container}>
        <Card>
-       <TouchableOpacity onPress={this.displayUserLogin}><Text>UserLogin</Text></TouchableOpacity>
            <CardItem>
                <Left>
                    <Thumbnail source={require ("./me.jpg")}/>
