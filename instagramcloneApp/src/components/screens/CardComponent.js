@@ -129,7 +129,6 @@ class CardComponent extends Component {
     return (
     <View style={styles.container}>
        <Card>
-
            <CardItem>
                <Left>
                    <Thumbnail source={require ("./me.jpg")}/>
