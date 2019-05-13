@@ -23,11 +23,7 @@ export default class Login extends Component {
                     'Alert Title',
                     'Dang nhap thanh cong : ' + this.state.email,
                     [
-                        {
-                            text: 'Cancel',
-                            onPress: () => console.log('Cancel Pressed'),
-                            style: 'cancel',
-                        },
+                        
                         { text: 'OK', onPress: () => this.props.navigation.navigate('MainScreen') },
                     ],
                     { cancelable: false },
@@ -42,11 +38,7 @@ export default class Login extends Component {
                     'Alert Title',
                     'Dang nhap that bai : ',
                     [
-                        {
-                            text: 'Cancel',
-                            onPress: () => console.log('Cancel Pressed'),
-                            style: 'cancel',
-                        },
+                    
                         { text: 'OK', onPress: () => console.log('OK Pressed') },
                     ],
                     { cancelable: false },
