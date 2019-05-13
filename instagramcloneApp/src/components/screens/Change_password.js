@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard,Alert } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { firebaseApp } from '../screens/FirebaseConfig.js'
@@ -12,28 +12,20 @@ export default class ChangePassword extends Component {
             currentPassword: '',
         };
     }
-    reauthenticate = (currentPassword) => {
-        var user = firebaseApp.auth().currentUser;
-        var cred = firebaseApp.auth.EmailAuthProvider.credential(user.email, currentPassword);
-        return user.reauthenticateWithCredential(cred);
+    
+    onChangePassword =() =>{
+        var user =firebaseApp.auth().currentUser;
+        if(user != null){
+              user.updatePassword(this.state.newPassword)
+              .then(() =>{
+                      Alert.alert("Password was changed");
+              })
+              .catch((error) =>{
+                  console.log(error.message); 
+              })
+        }
     }
 
-    onChangePassword() {
-
-        this.reauthenticate(this.state.currentPassword).then(() => {
-            var user = firebaseApp.auth().currentUser;
-            user.updatePassword(this.state.newPassword).then(() => {
-                Alert.alert("Password was changed");
-            }).catch((error) => {
-                Alert.alert(error.message);
-            });
-        }).catch((error) => {
-            Alert.alert(error.message);
-        });
-        
-
-
-    }
     render() {
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -61,7 +53,7 @@ export default class ChangePassword extends Component {
                             </TextInput>
                         </View>
 
-                        <TouchableOpacity style={styles.loginButton} onPress={() => { this.onChangePassword() }}>
+                        <TouchableOpacity style={styles.loginButton} onPress={this.onChangePassword}>
                             <Text style={styles.loginButtonTitle}>Change password</Text>
                         </TouchableOpacity>
 
