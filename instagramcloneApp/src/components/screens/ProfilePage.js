@@ -10,7 +10,8 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {Icon,Button} from 'native-base';
+import {Icon,Button,CardItem,Thumbnail,Input} from 'native-base';
+import {firebaseApp} from './FirebaseConfig';
 
 
 
@@ -25,27 +26,58 @@ class ProfilePage extends Component {
     super();
     this.state={
         liked:false,
-        screenWidth:Dimensions.get("window").width
+        screenWidth:Dimensions.get("window").width,
+        likeNumber:0,
+        comment:''
     }
   } 
 
   likeToggled(){
-      this.setState({
-          liked:!this.state.liked
-      })
+    this.setState({
+        liked:!this.state.liked
+    })
+  }
+
+  userInfo(){
+    var user = firebaseApp.auth().currentUser;
+    var email;
+    if (user!=null){
+        email = user.email;
+        return email;
+    }
+  }
+
+  postComment(){
+    let comment = this.state.comment;
+    let userEmail = this.userInfo();
+    Alert.alert(userEmail);
+    let postId = 1;
+    firebaseApp.database().ref('Comments').push({
+        postId,
+        userEmail,
+        comment
+        
+    }).then((data)=>{
+            console.log('data',data)
+    }).catch((error)=>{
+            console.log('error',error)
+    })
   }
 
   render() {
 
     const imageUri='https://images8.alphacoders.com/618/618469.jpg';
     const heartIconColor=(this.state.liked) ? "red" : null;
+    let Likednumber = (this.state.liked) ? (this.setState.numberLiked = this.state.likeNumber + 1) : (this.state.likeNumber);
+    let userEmail = (this.userInfo());
+
 
     return (
       <View style={{flex:1,width:100+"%"}}>
         <View style={styles.view1}>
             <View style={{flexDirection:"row", alignItems:"center"}}>
                 <Text style={{fontWeight:"bold",fontSize:15}}>
-                    Như Quỳnh
+                  {userEmail}
                 </Text>
             </View>
             <View>
@@ -61,7 +93,7 @@ class ProfilePage extends Component {
                 
                 />
                 <View>
-                    <Text style={{fontWeight:"bold"}}>Như Quỳnh</Text>
+                    <Text style={{fontWeight:"bold"}}> {userEmail}</Text>
                 </View>
             </View>
             <View style={styles.view2_2}>
@@ -101,7 +133,7 @@ class ProfilePage extends Component {
                         source={{uri:'https://static.giantbomb.com/uploads/scale_small/13/135472/1891759-002ivysaur.png'}}
                     
                     />
-                    <Text style={{fontWeight:"bold",fontSize:15}}>Như Quỳnh</Text>
+                    <Text style={{fontWeight:"bold",fontSize:15}}>{userEmail}</Text>
                 </View>
                 <View>
                     <Text style={{fontWeight:"bold",fontSize:30}}>...</Text>
@@ -121,7 +153,8 @@ class ProfilePage extends Component {
             </TouchableOpacity>
             <View style={styles.like}>
                 <View style={styles.icon}>
-                  <Button transparent >
+                   <Button transparent onPress={() =>{
+                      this.likeToggled()}}>
                        <Icon name='heart' style={{color:heartIconColor}}/>
                    </Button>
                    <Button transparent>
@@ -132,13 +165,28 @@ class ProfilePage extends Component {
                    </Button>
                 </View>
                 <View style={{flexDirection:"column",alignItems:"center"}}>
-                    <Text style={{fontWeight:"bold",fontSize:15}}>100 Likes</Text>
+                    <Text style={{fontWeight:"bold",fontSize:15}}>{Likednumber}Likes</Text>
                 </View>
                 
             </View>
           
         </View>
 
+        <View>
+          <CardItem>
+                <Thumbnail source={{uri:'https://static.giantbomb.com/uploads/scale_small/13/135472/1891759-002ivysaur.png'}} small></Thumbnail>
+                <Text style={{color:'black', fontWeight: 'bold'}}>{userEmail}</Text>
+                <Input
+                    placeholder="Write your comment"
+                    onChangeText={(comment)=>this.setState({comment})}
+                    value={this.state.comment}>
+                </Input>
+                <TouchableOpacity style={{paddingLeft:10}} onPress={this.postComment.bind(this)}>
+                    <Text style={{color:'red'}}>Send</Text>
+                </TouchableOpacity>
+            </CardItem>
+        </View>
+        
     </View>
     );
   }

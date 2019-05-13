@@ -5,28 +5,48 @@ import {
   Text,
   View,
   Image,
-  TextInput,TouchableOpacity
+  TextInput,
+  TouchableOpacity,
+  Alert
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {Icon} from 'native-base';
+import {Icon,Button} from 'native-base';
+import {firebaseApp} from './FirebaseConfig';
 
-class EditProfile extends Component {  
+export default class EditProfile extends Component {  
   static navigationOptions = {
     tabBarIcon :
     <Icon name="create"/>
   }  
 
   constructor(props){
-		super(props)
+        super(props)
 		this.state ={
             ten: "",
-            email:"",
+            currentPassword: "",
+            newEmail: "",
             sdt:"",
             gioitinh:""
 		};
 		
   }
+
+
+  onChangeEmailPress =() =>{
+      var user =firebaseApp.auth().currentUser;
+      if(user != null){
+            user.updateEmail(this.state.newEmail)
+            .then(() =>{
+                    Alert.alert("Email was changed");
+            })
+            .catch((error) =>{
+                console.log(error.message); 
+            })
+      }
+  }
+
+  
 
   render() {
     return (
@@ -34,13 +54,14 @@ class EditProfile extends Component {
       
             <View style={styles.view1}>
                 <View style={styles.view1_1}>
-                  <Icon name="close-circle" style={{color: "red"}}/>
-                  <Text style={{marginLeft:7,fontSize:20}}>Chỉnh sửa trang cá nhân</Text>
+                    <Button transparent>
+                        <Icon name='close-circle' style={{color:'red'}}/>
+                    </Button>
+                    <Text style={{marginLeft:7,fontSize:20}}>Chỉnh sửa trang cá nhân</Text>
                 </View>
-                <View>
-                    <Icon name="checkmark-circle" style={{color: "green"}}/>
-                </View>
-                
+                <TouchableOpacity onPress={this.onChangeEmailPress}>
+                    <Icon name='checkmark-circle' style={{color:'green'}}/>
+                </TouchableOpacity>
             </View>
 
             <View style={styles.view2}>
@@ -65,12 +86,21 @@ class EditProfile extends Component {
                     </TextInput>
                 </View>
 
+                {/* <View style={styles.input}>
+                    <Text>Password: </Text>
+                    <TextInput style={styles.textInput} value={this.state.currentPassword}
+                        placeholder="Current Password" 
+                        autoCapitalize="none" secureTextEntry={true}
+                        onChangeText={(text) => { this.setState({currentPassword: text}) }}
+                    />
+                </View> */}
+
                 <View style={styles.input}>
                     <Text>Email: </Text>
-                    <TextInput
-                        keyboardType='email-address'
-                        value={this.state.email}
-                        onChangeText={(email)=>this.setState({email})}
+                    <TextInput 
+                        value={this.state.newEmail}
+                        keyboardType="email-address"
+                        onChangeText={(text) => { this.setState({newEmail: text}) }}
                     >
                     </TextInput>
                 </View>
@@ -106,7 +136,7 @@ class EditProfile extends Component {
     );
   }
 }
-export default EditProfile;
+//export default EditProfile;
 const styles = StyleSheet.create({
   container: {
     width: 100 + "%",
@@ -171,7 +201,7 @@ view3:{
 input:{
     flexDirection:'row',
     justifyContent:'center',
-    alignItems:'center'
+    alignItems:'center'    
 },
 
 view4:{
