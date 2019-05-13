@@ -49,7 +49,8 @@ class ProfilePage extends Component {
                 </Text>
             </View>
             <View>
-                <Text style={{fontWeight:"bold",fontSize:30}}>...</Text>
+              <TouchableOpacity onPress={()=>{this.props.navigation.navigate('NavigatorLogout')}}><Text style={{fontWeight:"bold",fontSize:30}}>...</Text></TouchableOpacity>
+                
             </View>
         </View>
 

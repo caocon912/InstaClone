@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import {View,Text,StyleSheet, Image} from 'react-native';
-
 import {StackNavigator} from 'react-navigation';
 import Login from './Login';
 import MainScreen from './MainScreen';
 import Register from './Register';
-import Forgot_password from './Forgot_password'
-import EditProfilePage from './EditProfilePage'
+import Forgot_password from './Forgot_password';
+
 const DemoNavigation= StackNavigator({
     Login:{
         screen:Login
@@ -14,12 +13,13 @@ const DemoNavigation= StackNavigator({
     Register:{
         screen:Register
     },
-    MainScreen:{
-        screen:MainScreen
-    },
     Forgot_password:{
         screen:Forgot_password
     },
+    MainScreen:{
+        screen:MainScreen
+    },
+    
 },{
     headerMode: 'none',
     navigationOptions: {

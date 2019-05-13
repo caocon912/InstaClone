@@ -21,11 +21,7 @@ class Register extends Component {
                     'Alert Title',
                     'Dang ki thanh cong : ' + this.state.email,
                     [
-                        {
-                            text: 'Cancel',
-                            onPress: () => console.log('Cancel Pressed'),
-                            style: 'cancel',
-                        },
+                        
                         user.sendEmailVerification(),
                         { text: 'OK', onPress: () => this.props.navigation.navigate('Login') },
                     ],
@@ -41,11 +37,7 @@ class Register extends Component {
                     'Alert Title',
                     'Dang ki that bai : ',
                     [
-                        {
-                            text: 'Cancel',
-                            onPress: () => console.log('Cancel Pressed'),
-                            style: 'cancel',
-                        },
+                        
                         { text: 'OK', onPress: () => console.log('OK Pressed') },
                     ],
                     { cancelable: false },
