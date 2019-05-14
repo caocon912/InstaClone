@@ -7,19 +7,32 @@ class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
+            userEmail: '',
             password: '',
+            phoneNumber:'',
+            userName:'',
+            sex:''
 
         }
-
+        this.itemRef = firebaseApp.database();
     }
     Dangky() {
-        firebaseApp.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+        firebaseApp.auth().createUserWithEmailAndPassword(this.state.userEmail, this.state.password)
             .then(() => {
                 var user = firebaseApp.auth().currentUser;
+                this.itemRef.ref('Users').push({
+                    avartar:'',
+                    followers:0,
+                    followings:0,
+                    numberPosts:0,
+                    phoneNumber:this.state.phoneNumber,
+                    userEmail:this.state.userEmail,
+                    userName:this.state.userName,
+                    sex:this.state.sex
+                });
                 Alert.alert(
                     'Alert Title',
-                    'Dang ki thanh cong : ' + this.state.email,
+                    'Dang ki thanh cong : ' + this.state.userEmail,
                     [
                         
                         user.sendEmailVerification(),
