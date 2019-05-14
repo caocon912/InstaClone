@@ -28,8 +28,11 @@ class Register extends Component {
                     { cancelable: false },
                 );
                 this.setState({
-                    email: '',
+                    userEmail: '',
                     password: '',
+                    phoneNumber:'',
+                    userName:'',
+                    sex:''
                 })
             })
             .catch(function (error) {
@@ -70,8 +73,8 @@ class Register extends Component {
                                     textContentType='emailAddress'
                                     keyboardType='email-address'
                                     placeholder="Email"
-                                    onChangeText={(email)=>this.setState({email})}
-                                    value={this.state.email}>
+                                    onChangeText={(userEmail)=>this.setState({userEmail})}
+                                    value={this.state.userEmail}>
                                 </TextInput>
                             </View>
                             <View style={styles.textinputContainer}>
@@ -80,6 +83,27 @@ class Register extends Component {
                                     secureTextEntry={true}
                                     onChangeText={(password)=>this.setState({password})}
                                     value={this.state.password}>
+                                </TextInput>
+                            </View>
+                            <View style={styles.textinputContainer}>
+                                <TextInput style={styles.textInput}
+                                    placeholder="phoneNumber"
+                                    onChangeText={(phoneNumber)=>this.setState({phoneNumber})}
+                                    value={this.state.phoneNumber}>
+                                </TextInput>
+                            </View>
+                            <View style={styles.textinputContainer}>
+                                <TextInput style={styles.textInput}
+                                    placeholder="userName"
+                                    onChangeText={(userName)=>this.setState({userName})}
+                                    value={this.state.userName}>
+                                </TextInput>
+                            </View>
+                            <View style={styles.textinputContainer}>
+                                <TextInput style={styles.textInput}
+                                    placeholder="sex"
+                                    onChangeText={(sex)=>this.setState({sex})}
+                                    value={this.state.sex}>
                                 </TextInput>
                             </View>
 
