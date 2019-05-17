@@ -19,27 +19,13 @@ class HomePage extends Component {
   render() {
     return (
       <Container style={styles.container}>
-          <Header style={{backgroundColor:"white"}}>
+          <Header style={{backgroundColor:"white", justifyContent:'space-between',flexDirection:'row'}}>
             <Left><Icon name = "camera" style={{paddingLeft:10}}/></Left>
-            <Body><Text>Instagram</Text></Body>
+            <Body><Text style={styles.title}>Instagram</Text></Body>
             <Right><Icon name = 'paper-plane' style={{paddingRight:10}}/></Right>
           </Header>
         <Content>
-          <CardComponent 
-            imageSource = "1" 
-            userComment = "Nhi"
-            comment = "Wow!"
-          />
-          <CardComponent 
-            imageSource = "2" 
-            userComment = "Thi"
-            comment = "Beautiful!"
-          />
-          <CardComponent 
-            imageSource = "3" 
-            userComment = "Quynh"
-            comment = "Like"
-          />
+          <CardComponent/>
         </Content>
       </Container>
     );
@@ -51,4 +37,9 @@ const styles = StyleSheet.create({
     flex:0,
     backgroundColor: 'white',
   },
+  title: {
+    color: 'black',
+    textAlign: 'center',
+    fontSize: 30
+  }
 });

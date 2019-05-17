@@ -25,6 +25,7 @@ class CardComponent extends Component {
             liked:false,
             likeNumber : 0,
             comment : '',
+            dataSourcePost: new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2}),
             dataSource: new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2})
         }
     } 
@@ -32,6 +33,7 @@ class CardComponent extends Component {
         this.setState({
             liked:!this.state.liked
         })
+
     }
 
     //get email of user
@@ -43,33 +45,27 @@ class CardComponent extends Component {
             return email;
         }
     }
-    /*displayuserLogin = async ()=>{
-        try{
-               let userEmail =  await AsyncStorage.getItem('user')
-               return userEmail;
-        }catch(error){
-                console.log(error);
-        }
-    }*/
-
-    //post comment and save in database
-    postComment(){
-        let comment = this.state.comment;
-        let userEmail = this.userInfo();
-        let avatar  = 'https://img.icons8.com/color/1600/circled-user-male-skin-type-1-2.png';
-        let postId = 1;
-        firebaseApp.database().ref('Comments').push({
-            postId,
-            avatar,
-            userEmail,
-            comment
-            
-        }).then((data)=>{
-                console.log('data',data)
-        }).catch((error)=>{
-                console.log('error',error)
-        })
+    
+    //display all posts in database
+    displayPost(){
+        //1 mảng lưu comment từ db
+        var posts = [];
+        this.itemRef.ref('Posts').on('child_added',(dataSnapshot)=>{
+            posts.push({
+                content:dataSnapshot.val().content,
+                userEmail:dataSnapshot.val().userEmail,
+                imgURL:dataSnapshot.val().imgURL,
+                numberLikes:dataSnapshot.val().numberLikes,
+                numberComments:dataSnapshot.val().numberComments,
+                _key: dataSnapshot.key
+            });
+            //đưa mảng vào datasource để hiển thị ra listview
+            this.setState({
+                dataSourcePost: this.state.dataSource.cloneWithRows(posts)
+            });
+        });
     }
+
     //display comment 
     displayComment(itemRef){
         //1 mảng lưu comment từ db
@@ -93,6 +89,25 @@ class CardComponent extends Component {
             })
         });
     }
+    //post comment and save in database
+    postComment(rowPost){
+        let comment = this.state.comment;
+        let userEmail = this.userInfo();
+        let avatar  = 'https://img.icons8.com/color/1600/circled-user-male-skin-type-1-2.png';
+        let postId = rowPost._key;
+        firebaseApp.database().ref('Comments').push({
+            postId,
+            avatar,
+            userEmail,
+            comment
+            
+        }).then((data)=>{
+                console.log('data',data)
+        }).catch((error)=>{
+                console.log('error',error)
+        })
+    }
+    
 
     //delete comment in db
     deleteComment(rowData){
@@ -128,75 +143,79 @@ class CardComponent extends Component {
     }
     return (
     <View style={styles.container}>
-       <Card>
-           <CardItem>
-               <Left>
-                   <Thumbnail source={require ("./me.jpg")}/>
-                   <Body>
-                       <Text style={{ fontWeight: 'bold'}}>Vorum</Text>
-                       <Text note>Jan 15,2018</Text>
-                   </Body>
-               </Left>
-           </CardItem>
-
-           <CardItem cardBody>
-                <Image source={imageList[this.props.imageSource]} style={{height:200,width:null,flex:1}}/>
-           </CardItem>
-
-           <CardItem style={{height:45}}>
-               <Left>
-                   <Button transparent onPress={() =>{
-                    this.likeToggled()}}>
-                       <Icon name='heart' style={{color:heartIconColor}}/>
-                   </Button>
-                   <Button transparent>
-                       <Icon name='chatbubbles' style={{color:'black'}}/>
-                   </Button>
-                   <Button transparent>
-                       <Icon name='paper-plane' style={{color:'black'}}/>
-                   </Button>
-               </Left>
-           </CardItem>
-
-           <CardItem style={{height:20}}>
-                <Text>{Likednumber} likes this</Text>
-           </CardItem>
-           
-           <CardItem>
-           <ListView
-                    dataSource = {this.state.dataSource}
-                    renderRow = {(rowData)=>
-                    <View>
-                        <View style={{flexDirection: 'row'}}>
-                            <Thumbnail source={{uri: rowData.avatar}} small></Thumbnail>
-                            <Text style={{color:'black', fontWeight: 'bold'}}>{rowData.userEmail}:</Text>
-                            <Text>{rowData.comment}</Text>
-                            <TouchableOpacity onPress={()=>this.deleteComment(rowData)}><Text style={{color:'red'}}>Xóa</Text></TouchableOpacity>
-                        </View>
-                    </View>
-                    }
-                />
-           </CardItem>
-
+        <ListView dataSource = {this.state.dataSourcePost}
+                renderRow = {(rowPost)=>
+        <Card>
             <CardItem>
-                <Thumbnail source={require('../pictures/dog.jpg')} small></Thumbnail>
-                <Text style={{color:'black', fontWeight: 'bold'}}>{userEmail}</Text>
-                <Input
-                    placeholder="Write your comment"
-                    onChangeText={(comment)=>this.setState({comment})}
-                    value={this.state.comment}>
-                </Input>
-                <TouchableOpacity style={{paddingLeft:10}} onPress={this.postComment.bind(this)}>
-                <Icon name = 'send' style={{paddingRight:10}}/>
-                </TouchableOpacity>
+                <Left>
+                    <Thumbnail source={require ("./me.jpg")}/>
+                    <Body>
+                        <Text style={{ fontWeight: 'bold'}}>{rowPost.userEmail}</Text>
+                        <Text note>Jan 15,2018</Text>
+                    </Body>
+                </Left>
             </CardItem>
-       
-       </Card>
+
+            <CardItem cardBody>
+                    <Image source={{uri:rowPost.imgURL}} style={{height:200,width:null,flex:1}}/>
+            </CardItem>
+
+            <CardItem style={{height:45}}>
+                <Left>
+                    <Button transparent onPress={() =>{this.likeToggled()}}>
+                        <Icon name='heart' style={{color:heartIconColor}}/>
+                    </Button>
+                    <Button transparent>
+                        <Icon name='chatbubbles' style={{color:'black'}}/>
+                    </Button>
+                    <Button transparent>
+                        <Icon name='paper-plane' style={{color:'black'}}/>
+                    </Button>
+                </Left>
+            </CardItem>
+
+            <CardItem style={{height:20}}>
+                    <Text>{rowPost.numberLikes} likes this</Text>
+            </CardItem>
+            
+            <CardItem>
+                    <ListView
+                        dataSource = {this.state.dataSource}
+                        renderRow = {(rowData)=>
+                            <View>
+                                <View style={{flexDirection: 'row'}}>
+                                    <Thumbnail source={{uri: rowData.avatar}} small></Thumbnail>
+                                    <Text style={{color:'black', fontWeight: 'bold'}}>{rowData.userEmail}:</Text>
+                                    <Text>{rowData.comment}</Text>
+                                    <TouchableOpacity onPress={()=>this.deleteComment(rowData)}><Text style={{color:'red'}}>Xóa</Text></TouchableOpacity>
+                                </View>
+                            </View>
+                        }
+                    />
+            </CardItem>
+
+                <CardItem>
+                    <Thumbnail source={require('../pictures/dog.jpg')} small></Thumbnail>
+                    <Text style={{color:'black', fontWeight: 'bold'}}>{userEmail}</Text>
+                    <Input
+                        placeholder="Write your comment"
+                        onChangeText={(comment)=>this.setState({comment})}
+                        value={this.state.comment}>
+                    </Input>
+                    <TouchableOpacity style={{paddingLeft:10}} onPress={()=>this.postComment(rowPost)}>
+                    <Icon name = 'send' style={{paddingRight:10}}/>
+                    </TouchableOpacity>
+                </CardItem>
+        
+        </Card>
+        }
+        />
     </View>
     );
   }
   componentDidMount(){
     this.displayComment(this.itemRef);
+    this.displayPost();
 }
 }
 export default CardComponent;
