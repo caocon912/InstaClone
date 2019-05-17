@@ -6,8 +6,7 @@ import {
   View,
   Image,
   Dimensions,
-  TouchableOpacity,
-  ListView
+  TouchableOpacity
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -29,10 +28,8 @@ class ProfilePage extends Component {
         liked:false,
         screenWidth:Dimensions.get("window").width,
         likeNumber:0,
-        comment:'',
-        dataSource: new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2})
+        comment:''
     }
-    this.itemRef = firebaseApp.database();
   } 
 
   likeToggled(){
@@ -66,52 +63,6 @@ class ProfilePage extends Component {
             console.log('error',error)
     })
   }
-  displayComment(itemRef){
-    //1 mảng lưu comment từ db
-    var items = [];
-    this.itemRef.ref('Comments').on('child_added',(dataSnapshot)=>{
-        items.push({
-            comment:dataSnapshot.val().comment,
-            userEmail:dataSnapshot.val().userEmail,
-            avatar : dataSnapshot.val().avatar,
-            _key: dataSnapshot.key
-        });
-        //đưa mảng vào datasource để hiển thị ra listview
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(items)
-        });
-    });
-    this.itemRef.ref('Comments').on('child_removed',(dataSnapshot)=>{
-        items = items.filter((x)=>x._key !== dataSnapshot.key);
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(items)
-        })
-    });
-}
-
-//delete comment in db
-deleteComment(rowData){
-    //this.itemRef.ref('Comments').child(rowData._key).remove();
-    //this.displayComment;
-    Alert.alert(
-        'thông báo',
-        'Xóa bình luận? : ',
-        [
-            {
-                text: 'OK',
-                onPress:()=>{
-                    this.itemRef.ref('Comments').child(rowData._key).remove();
-                    this.displayComment;
-                }
-            },
-            { 
-                text: 'cancel', 
-                onPress: () =>console.log('Cancel Pressed')
-            },
-        ],
-        { cancelable: false },
-    );
-}
 
   render() {
 
@@ -223,41 +174,22 @@ deleteComment(rowData){
         </View>
 
         <View>
-            <CardItem>
-              <ListView
-                  dataSource = {this.state.dataSource}
-                  renderRow = {(rowData)=>
-                  <View>
-                      <View style={{flexDirection: 'row'}}>
-                          <Thumbnail source={{uri: rowData.avatar}} small></Thumbnail>
-                          <Text style={{color:'black', fontWeight: 'bold'}}>{rowData.userEmail}:</Text>
-                          <Text>{rowData.comment}</Text>
-                          <TouchableOpacity onPress={()=>this.deleteComment(rowData)}><Text style={{color:'red'}}>Xóa</Text></TouchableOpacity>
-                      </View>
-                  </View>
-                  }
-              />
-           </CardItem>
-
-           <CardItem>
-              <Thumbnail source={{uri:'https://static.giantbomb.com/uploads/scale_small/13/135472/1891759-002ivysaur.png'}} small></Thumbnail>
-              <Text style={{color:'black', fontWeight: 'bold'}}>{userEmail}</Text>
-              <Input
-                  placeholder="Write your comment"
-                  onChangeText={(comment)=>this.setState({comment})}
-                  value={this.state.comment}>
-              </Input>
-              <TouchableOpacity style={{paddingLeft:10}} onPress={this.postComment.bind(this)}>
-                <Icon name = 'send' style={{paddingRight:10}}/>
-              </TouchableOpacity>
+          <CardItem>
+                <Thumbnail source={{uri:'https://static.giantbomb.com/uploads/scale_small/13/135472/1891759-002ivysaur.png'}} small></Thumbnail>
+                <Text style={{color:'black', fontWeight: 'bold'}}>{userEmail}</Text>
+                <Input
+                    placeholder="Write your comment"
+                    onChangeText={(comment)=>this.setState({comment})}
+                    value={this.state.comment}>
+                </Input>
+                <TouchableOpacity style={{paddingLeft:10}} onPress={this.postComment.bind(this)}>
+                    <Text style={{color:'red'}}>Send</Text>
+                </TouchableOpacity>
             </CardItem>
         </View>
         
     </View>
     );
-  }
-  componentDidMount(){
-    this.displayComment(this.itemRef);
   }
 }
 export default ProfilePage;

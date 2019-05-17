@@ -7,8 +7,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
-  Alert,
-  ListView
+  Alert
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -21,110 +20,46 @@ export default class EditProfile extends Component {
     <Icon name="create"/>
   }  
 
-    constructor(props){
-            super(props)
-            this.state ={
-                newusesName: "",
-                newuserEmail: "",
-                newphoneNumber:"",
-                dataSource: new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2})
-            }
-            this.itemRef = firebaseApp.database();
-    }
+  constructor(props){
+        super(props)
+		this.state ={
+            ten: "",
+            currentPassword: "",
+            newEmail: "",
+            sdt:"",
+            gioitinh:""
+		};
+		
+  }
 
-    userInfo(){
-        var user = firebaseApp.auth().currentUser;
-        var email;
-        if (user!=null){
-            email = user.email;
-            return email;
-        }
-    }
 
-    /*displayUserid(){
-        var ref = firebaseApp.database().ref("Users");
-        var query = ref.orderByChild('userEmail').equalTo(this.userInfo());
-        var id="";
-        query.on("child_added", function(snapshot) {
-            // User found
-            if (snapshot.val()) {
-                //Alert.alert(snapshot.key) //hiện ra father
-                var userId =snapshot.key;
-                id +=userId;
-                //return userId;
-            }
-        });  
-        Alert.alert(id);
-        //return id;
-    }*/
-
-    displayUserid(){
-        var ref = firebaseApp.database().ref("Users");
-        var query = ref.orderByChild('userEmail').equalTo(this.userInfo());
-        query.on("child_added", function(snapshot) {
-            // User found
-            if (snapshot.val()) {
-                var userId =snapshot.key;
-                Alert.alert(userId);
-                //return userId;
-            }
-        });  
-        //Alert.alert(id);
-        //return id;
-    }
-    displayUserdata(itemRef){
-        var items = [];
-        this.itemRef.ref('Users').child('-Lf5L84AARUXv_yo5aRa').on('child_added',(dataSnapshot)=>{
-            items.push({
-                userEmail:dataSnapshot.val().userEmail,
-                userName : dataSnapshot.val().userName,
-                phoneNumber:dataSnapshot.val().phoneNumber,
-                name:dataSnapshot.val(),
-                _key: dataSnapshot.key
-            });
-            //đưa mảng vào datasource để hiển thị ra listview
-            this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(items)
-            });
-        });
-    }
-
-    onChangeData =() =>{
-        var user =firebaseApp.auth().currentUser;
-        if(user != null){
-            user.updateEmail(this.state.newuserEmail)
+  onChangeEmailPress =() =>{
+      var user =firebaseApp.auth().currentUser;
+      if(user != null){
+            user.updateEmail(this.state.newEmail)
             .then(() =>{
                     Alert.alert("Email was changed");
             })
             .catch((error) =>{
                 console.log(error.message); 
             })
+      }
+  }
 
-            
-            this.itemRef.ref('Users').child('-Lf5L84AARUXv_yo5aRa').update({
-                userEmail:this.state.newuserEmail,
-                userName:this.state.newuserName,
-                phoneNumber:this.state.newphoneNumber,
-            });
-            this.displayUserdata(this.itemRef);
-        
-
-        }
-    }
+  
 
   render() {
-    let userEmail = (this.userInfo());
     return (
       <View style={styles.container}>
       
             <View style={styles.view1}>
                 <View style={styles.view1_1}>
-                    <TouchableOpacity onPress={()=>this.displayUserid()}>
+                    <Button transparent>
                         <Icon name='close-circle' style={{color:'red'}}/>
-                    </TouchableOpacity>
+                    </Button>
                     <Text style={{marginLeft:7,fontSize:20}}>Chỉnh sửa trang cá nhân</Text>
                 </View>
-                <TouchableOpacity onPress={this.onChangeData}>
+                <TouchableOpacity onPress={this.onChangeEmailPress}>
                     <Icon name='checkmark-circle' style={{color:'green'}}/>
                 </TouchableOpacity>
             </View>
@@ -140,63 +75,66 @@ export default class EditProfile extends Component {
                 </View>
             </View>
             
-            <ListView
-                    dataSource = {this.state.dataSource}
-                    renderRow = {(rowData)=>
-                        <View>
-                            <Text style={{color:'black'}}>
-                                {rowData.name}
-                            </Text>
-                        </View>
-                    }
-            />
 
             <View style={styles.view3}>
                 <View style={styles.input}>
                     <Text>Tên: </Text>
-                    <TextInput style={styles.textInput}
-                        onChangeText={(newuserName)=>this.setState({newuserName})}
-                        value={this.state.newuserName}>
+                    <TextInput
+                        value={this.state.ten}
+                        onChangeText={(ten)=>this.setState({ten})}
+                    >
                     </TextInput>
                 </View>
 
+                {/* <View style={styles.input}>
+                    <Text>Password: </Text>
+                    <TextInput style={styles.textInput} value={this.state.currentPassword}
+                        placeholder="Current Password" 
+                        autoCapitalize="none" secureTextEntry={true}
+                        onChangeText={(text) => { this.setState({currentPassword: text}) }}
+                    />
+                </View> */}
+
                 <View style={styles.input}>
                     <Text>Email: </Text>
-                    <TextInput style={styles.textInput}
-                        textContentType='emailAddress'
-                        keyboardType='email-address'
-                        onChangeText={(newuserEmail)=>this.setState({newuserEmail})}
-                        value={this.state.newuserEmail}>
+                    <TextInput 
+                        value={this.state.newEmail}
+                        keyboardType="email-address"
+                        onChangeText={(text) => { this.setState({newEmail: text}) }}
+                    >
                     </TextInput>
                 </View>
 
                 <View style={styles.input}>
                     <Text>Số điện thoại: </Text>
-                    <TextInput style={styles.textInput}
-                        onChangeText={(newphoneNumber)=>this.setState({newphoneNumber})}
-                        value={this.state.newphoneNumber}>
+                    <TextInput
+                        keyboardType='numeric'
+                        value={this.state.sdt}
+                        onChangeText={(sdt)=>this.setState({sdt})}
+                    >
                     </TextInput>
                 </View>
 
+                <View style={styles.input}>
+                    <Text>Giới tính</Text>
+                    <TextInput
+                        value={this.state.gioitinh}
+                        onChangeText={(gioitinh)=>this.setState({gioitinh})}
+                    >
+                    </TextInput>
+                </View>
             </View>
 
             <View style={styles.view4}>
             <TouchableOpacity
             onPress={() => this.props.navigation.navigate('Change_password')}
-            >
-                <Text>
-                    Đổi mật khẩu
-                </Text>
-            </TouchableOpacity>
+            ><Text>Đổi mật khẩu</Text></TouchableOpacity>
                 
             </View>
 
         </View>
     );
   }
-    componentDidMount(){
-        this.displayUserdata(this.itemRef);
-    }
 }
 //export default EditProfile;
 const styles = StyleSheet.create({
