@@ -10,8 +10,7 @@ class Register extends Component {
             userEmail: '',
             password: '',
             phoneNumber:'',
-            userName:'',
-            sex:''
+            userName:''
 
         }
         this.itemRef = firebaseApp.database();
@@ -27,8 +26,7 @@ class Register extends Component {
                     numberPosts:0,
                     phoneNumber:this.state.phoneNumber,
                     userEmail:this.state.userEmail,
-                    userName:this.state.userName,
-                    sex:this.state.sex
+                    userName:this.state.userName
                 });
                 Alert.alert(
                     'Alert Title',
@@ -44,8 +42,7 @@ class Register extends Component {
                     userEmail: '',
                     password: '',
                     phoneNumber:'',
-                    userName:'',
-                    sex:''
+                    userName:''
                 })
             })
             .catch(function (error) {
@@ -110,13 +107,6 @@ class Register extends Component {
                                     placeholder="userName"
                                     onChangeText={(userName)=>this.setState({userName})}
                                     value={this.state.userName}>
-                                </TextInput>
-                            </View>
-                            <View style={styles.textinputContainer}>
-                                <TextInput style={styles.textInput}
-                                    placeholder="sex"
-                                    onChangeText={(sex)=>this.setState({sex})}
-                                    value={this.state.sex}>
                                 </TextInput>
                             </View>
 
