@@ -137,9 +137,9 @@ class CardComponent extends Component {
     let userEmail = (this.userInfo());
     let Likednumber = (this.state.liked) ? (this.setState.numberLiked = this.state.likeNumber + 1) : (this.state.likeNumber);
     const imageList = {
-        "1" : require("./me.jpg"),
-        "2" : require("../pictures/dog.jpg"),
-        "3" : require("../pictures/coder.jpg")
+        "1" : require("../pictures/coder.png"),
+        "2" : require("../pictures/coder.png"),
+        "3" : require("../pictures/coder.png")
     }
     return (
     <View style={styles.container}>
@@ -148,7 +148,7 @@ class CardComponent extends Component {
         <Card>
             <CardItem>
                 <Left>
-                    <Thumbnail source={require ("./me.jpg")}/>
+                    <Thumbnail source={require ("../pictures/coder.png")}/>
                     <Body>
                         <Text style={{ fontWeight: 'bold'}}>{rowPost.userEmail}</Text>
                         <Text note>Jan 15,2018</Text>
@@ -195,7 +195,7 @@ class CardComponent extends Component {
             </CardItem>
 
                 <CardItem>
-                    <Thumbnail source={require('../pictures/dog.jpg')} small></Thumbnail>
+                    <Thumbnail source={require('../pictures/coder.png')} small></Thumbnail>
                     <Text style={{color:'black', fontWeight: 'bold'}}>{userEmail}</Text>
                     <Input
                         placeholder="Write your comment"

@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {Icon,Button} from 'native-base';
+import { Input,Icon, CardItem, Left,Right, Thumbnail,Body, Container,Button,Card } from 'native-base';
 import {firebaseApp} from './FirebaseConfig';
 
 export default class EditProfile extends Component {  
@@ -74,12 +74,11 @@ export default class EditProfile extends Component {
     }
     displayUserdata(itemRef){
         var items = [];
-        this.itemRef.ref('Users').child('-Lf5L84AARUXv_yo5aRa').on('child_added',(dataSnapshot)=>{
+        this.itemRef.ref('Users').child('-LetPPEF24HICQmjxQ74').on('value',(dataSnapshot)=>{
             items.push({
                 userEmail:dataSnapshot.val().userEmail,
                 userName : dataSnapshot.val().userName,
                 phoneNumber:dataSnapshot.val().phoneNumber,
-                name:dataSnapshot.val(),
                 _key: dataSnapshot.key
             });
             //đưa mảng vào datasource để hiển thị ra listview
@@ -101,7 +100,7 @@ export default class EditProfile extends Component {
             })
 
             
-            this.itemRef.ref('Users').child('-Lf5L84AARUXv_yo5aRa').update({
+            this.itemRef.ref('Users').child('-LetPPEF24HICQmjxQ74').update({
                 userEmail:this.state.newuserEmail,
                 userName:this.state.newuserName,
                 phoneNumber:this.state.newphoneNumber,
@@ -140,46 +139,40 @@ export default class EditProfile extends Component {
                 </View>
             </View>
             
+            
             <ListView
-                    dataSource = {this.state.dataSource}
-                    renderRow = {(rowData)=>
-                        <View>
-                            <Text style={{color:'black'}}>
-                                {rowData.name}
-                            </Text>
-                        </View>
-                    }
+                dataSource = {this.state.dataSource}
+                renderRow = {(rowData)=>
+                <View style={styles.view3}>
+                    <View style={styles.input}>
+                        <Text>Tên: </Text>
+                        <Input style={styles.textInput}
+                            onChangeText={(newuserName)=>this.setState({newuserName})}
+                            value={rowData.userName}>
+                        </Input>
+                    </View>
+
+                    <View style={styles.input}>
+                        <Text>Email: </Text>
+                        <Input style={styles.textInput}
+                            textContentType='emailAddress'
+                            keyboardType='email-address'
+                            onChangeText={(newuserEmail)=>this.setState({newuserEmail})}
+                            value={rowData.userEmail}>
+                        </Input>
+                    </View>
+
+                    <View style={styles.input}>
+                        <Text>Số điện thoại: </Text>
+                        <Input style={styles.textInput}
+                            onChangeText={(newphoneNumber)=>this.setState({newphoneNumber})}
+                            value={rowData.phoneNumber}>
+                        </Input>
+                    </View>
+
+                </View>
+            }
             />
-
-            <View style={styles.view3}>
-                <View style={styles.input}>
-                    <Text>Tên: </Text>
-                    <TextInput style={styles.textInput}
-                        onChangeText={(newuserName)=>this.setState({newuserName})}
-                        value={this.state.newuserName}>
-                    </TextInput>
-                </View>
-
-                <View style={styles.input}>
-                    <Text>Email: </Text>
-                    <TextInput style={styles.textInput}
-                        textContentType='emailAddress'
-                        keyboardType='email-address'
-                        onChangeText={(newuserEmail)=>this.setState({newuserEmail})}
-                        value={this.state.newuserEmail}>
-                    </TextInput>
-                </View>
-
-                <View style={styles.input}>
-                    <Text>Số điện thoại: </Text>
-                    <TextInput style={styles.textInput}
-                        onChangeText={(newphoneNumber)=>this.setState({newphoneNumber})}
-                        value={this.state.newphoneNumber}>
-                    </TextInput>
-                </View>
-
-            </View>
-
             <View style={styles.view4}>
             <TouchableOpacity
             onPress={() => this.props.navigation.navigate('Change_password')}
@@ -257,7 +250,8 @@ userpic:{
 view3:{
     flex:4,
     flexDirection:'column',
-    alignItems:'flex-start'
+    alignItems:'flex-start',
+    paddingLeft: 20
 },
 
 input:{
